@@ -1,52 +1,62 @@
+
 public class UserInfoProgram {
-    public static void main(String[] args) {
-        int[] userIds = {1, 2, 3};
-        String[] userNames = {"Abraham Ama", "Bob Button", "Carol Carter"};
-        String[] departments = {"EE", "Trading", "Finance"};
-        float[] salaries = {30000, 50000, 20000};
+    static int[] userIds = {1, 2, 3};
+    static String[] userNames = {"Abraham Ama", "Bob Button", "Carol Carter"};
+    static String[] departments = {"EE", "Trading", "Finance"};
+    static float[] salaries = {30000, 50000, 20000};
 
-        if (args.length != 1) {
-            System.out.println("Please provide valid user id or type 'users' for all");
-            return;
+    public static void displayAllUsers() {
+        for (int i = 0; i < userIds.length; i++) {
+            int userId = userIds[i];
+            String userName = userNames[i];
+            String department = departments[i];
+            float salary = salaries[i];
+
+            System.out.println("userid: " + userId + ", User name: " + userName + ", Department: " + department + ", Salary: " + salary);
+
         }
+    }
+    public static void displayUserInfo(int userId) {
+        boolean isValidUserId = false;
+        for (int i = 0; i < userIds.length; i++) {
+            if (userId == userIds[i]) {
+                isValidUserId = true;
 
-        String input = args[0];
-
-        if (input.equals("users")) {
-
-            for (int i = 0; i < userIds.length; i++) {
-                int userId = userIds[i];
                 String userName = userNames[i];
                 String department = departments[i];
                 float salary = salaries[i];
 
-                System.out.println("userid: " + userId + ", User name: " + userName + ", Department: " + department + ", Salary: " + salary);
+                System.out.println("userid: " + userId + ", User name:   " + userName + ", department: " + department + ", salary:" + salary);
+
+                break;
             }
+        }
+
+        if (!isValidUserId) {
+            System.out.println("The id is invalid");
+        }
+    }
+
+    public static void main(String[] args) {
+        if (args.length < 2 || !args[0].equals("user")) {
+            System.out.println("Please provide valid user id or type 'users' for all");
+            return;
+        }
+
+        String input = args[1];
+
+        if (input.equals("users")) {
+            displayAllUsers();
 
         } else {
-
-            int inputUserId = Integer.parseInt(input);
-
-            boolean isValidUserId = false;
-            for (int userId : userIds) {
-                if (inputUserId == userId) {
-                    isValidUserId = true;
-                    break;
-                }
+            try {
+                int inputUserId = Integer.parseInt(input);
+                displayUserInfo(inputUserId);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input");
             }
-
-            if (isValidUserId) {
-                int arrayIndex = inputUserId - 1;
-
-                String userName = userNames[arrayIndex];
-                String department = departments[arrayIndex];
-                float salary = salaries[arrayIndex];
-
-                System.out.println("userid: " + inputUserId + ", User name:   " + userName + ", department: " + department + ", salary:" + salary);
-            } else {
-
-                System.out.println("The id is invalid");
             }
         }
     }
-}
+
+
