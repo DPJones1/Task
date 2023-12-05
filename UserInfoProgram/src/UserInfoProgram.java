@@ -1,5 +1,4 @@
-
-public class UserInfoProgram {
+public class userInfoProgram {
     static int[] userIds = {1, 2, 3};
     static String[] userNames = {"Abraham Ama", "Bob Button", "Carol Carter"};
     static String[] departments = {"EE", "Trading", "Finance"};
