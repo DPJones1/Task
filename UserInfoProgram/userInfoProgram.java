@@ -1,42 +1,12 @@
-public class userInfoProgram {
-    static int[] userIds = {1, 2, 3};
-    static String[] userNames = {"Abraham Ama", "Bob Button", "Carol Carter"};
-    static String[] departments = {"EE", "Trading", "Finance"};
-    static float[] salaries = {30000, 50000, 20000};
+package userInfoProgram;
 
-    public static void displayAllUsers() {
-        for (int i = 0; i < userIds.length; i++) {
-            int userId = userIds[i];
-            String userName = userNames[i];
-            String department = departments[i];
-            float salary = salaries[i];
+import services.UserDetailsService;
 
-            System.out.println("userid: " + userId + ", User name: " + userName + ", Department: " + department + ", Salary: " + salary);
-
-        }
-    }
-    public static void displayUserInfo(int userId) {
-        boolean isValidUserId = false;
-        for (int i = 0; i < userIds.length; i++) {
-            if (userId == userIds[i]) {
-                isValidUserId = true;
-
-                String userName = userNames[i];
-                String department = departments[i];
-                float salary = salaries[i];
-
-                System.out.println("userid: " + userId + ", User name:   " + userName + ", department: " + department + ", salary:" + salary);
-
-                break;
-            }
-        }
-
-        if (!isValidUserId) {
-            System.out.println("The id is invalid");
-        }
-    }
+public class UserInfoProgram {
 
     public static void main(String[] args) {
+        UserDetailsService UserDetailsService = new UserDetailsService();
+
         if (args.length < 2 || !args[0].equals("user")) {
             System.out.println("Please provide valid user id or type 'users' for all");
             return;
@@ -45,12 +15,12 @@ public class userInfoProgram {
         String input = args[1];
 
         if (input.equals("users")) {
-            displayAllUsers();
+            UserDetailsService.displayAllUsers();
 
         } else {
             try {
                 int inputUserId = Integer.parseInt(input);
-                displayUserInfo(inputUserId);
+                UserDetailsService.displayUserInfo(inputUserId);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
             }
